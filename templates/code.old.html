@@ -1,0 +1,40 @@
+ {% csrf_token %}
+                    {% for launch in pad %}
+                    <div id="draggable" class="but_array">
+
+                    <script>
+                        var sounds=[];
+                        var played=[];
+                        var currentSound =[];
+                        var count=0;
+                    </script>
+
+
+                    {% for dt in launch.buttonlist.all %}
+                        <script>
+                        played[count] = false;
+                        sounds[count] = new Howl({
+                          src: ['/{{ dt.audio.file }}']
+                        });
+
+                        document.write('<div id="btn'+count+'"style="display:block">');
+                        document.write('\x3Cscript>\n');
+
+                        document.write('var elem'+count+'  = document.getElementById("btn'+count+'");\n');
+                        document.write('if("ontouchstart" in document.documentElement){');
+
+                        document.write('elem'+count+'.addEventListener("touchstart", function(){ play_mode[3]('+count+')});}\n');
+;
+                        document.write('else{');
+
+                        document.write('elem'+count+'.addEventListener("click", function(){ play_mode[3]('+count+')});}\n');
+                        document.write('\x3C/script>');
+                        count++;
+                        </script>
+
+                        <div class="musicbutton" ><div class="box"></div>{{ dt.name }}</div>
+                        </div>
+
+                    {%  endfor %}
+                    </div>
+                    {%  endfor %}

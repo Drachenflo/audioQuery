@@ -1,0 +1,7 @@
+{% block content %}
+    {% csrf_token %}
+
+    {% for dt in data %}
+        {{ dt.name }}
+    {%  endfor %}
+{% endblock %}
